@@ -47,18 +47,19 @@ class LoadBCIC(LoadData):
 
 class LoadKU(LoadData):
     '''Subclass of LoadData for loading KU Dataset'''
-    def __init__(self,subject_id,*args):
-        self.subject_id=subject_id
-        self.fs=1000
+    def __init__(self,file_to_load,*args):
+        # self.subject_id=subject_id
+        self.file_to_load = file_to_load
+        self.fs=128
         super(LoadKU,self).__init__(*args)
 
-    def get_epochs(self,sessions=[1, 2]):
+    def get_epochs(self,sessions=[1,2]):
         for i in sessions:
-            file_to_load=f'session{str(i)}/s{str(self.subject_id)}/EEG_MI.mat'
-            self.load_raw_data_mat(file_to_load)
-            x_data = self.raw_eeg_subject['EEG_MI_train']['smt'][0, 0]
-            x_data = np.transpose(x_data,axes=[1, 2, 0])
-            labels = self.raw_eeg_subject['EEG_MI_train']['y_dec'][0, 0][0]
+            # file_to_load=f'session{str(i)}/s{str(self.subject_id)}/EEG_MI.mat'
+            self.load_raw_data_mat(self.file_to_load)
+            x_data = self.raw_eeg_subject['EEGsample']
+            # x_data = np.transpose(x_data,axes=[1, 2, 0])
+            labels = self.raw_eeg_subject['substate']
             y_labels = labels - np.min(labels)
             if hasattr(self,'x_data'):
                 self.x_data=np.append(self.x_data,x_data,axis=0)
@@ -66,7 +67,7 @@ class LoadKU(LoadData):
             else:
                 self.x_data = x_data
                 self.y_labels = y_labels
-        ch_names = self.raw_eeg_subject['EEG_MI_train']['chan'][0, 0][0]
+        ch_names = self.raw_eeg_subject['subindex']
         ch_names_list = [str(x[0]) for x in ch_names]
         eeg_data = {'x_data': self.x_data,
                     'y_labels': self.y_labels,
