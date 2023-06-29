@@ -21,12 +21,12 @@ class MLEngine:
     def experiment(self):
 
         '''for BCIC Dataset'''
-        bcic_data = LoadData.LoadBCIC(self.file_to_load, self.data_path)
-        eeg_data = bcic_data.get_epochs()
+        # bcic_data = LoadData.LoadBCIC(self.file_to_load, self.data_path)
+        # eeg_data = bcic_data.get_epochs()
 
         '''for KU dataset'''
-        # ku_data = LoadData.LoadKU(self.subject_id,self.data_path)
-        # eeg_data = ku_data.get_epochs(self.sessions)
+        bcic_data = LoadData.LoadKU(self.file_to_load, self.data_path)
+        eeg_data = bcic_data.get_epochs()
         # preprocess = Preprocess.PreprocessKU()
         # eeg_data_selected_channels = preprocess.select_channels(eeg_data.get('x_data'),eeg_data.get('ch_names'))
         # eeg_data.update({'x_data':eeg_data_selected_channels})
