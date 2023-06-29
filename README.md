@@ -1,6 +1,9 @@
-# FBCSP Toolbox
+# Workload Classification using FBCSP on STEW Dataset
 
-This contains the codebase for the FBCSP Toolbox.
-Please refer to <a href="https://fbcsptoolbox.github.io">fbcsptoolbox.github.io</a> for information on the toolbox.
+This repository contains a Python project that applies Filter Bank Common Spatial Pattern (FBCSP) to classify Electroencephalography (EEG) workload data. The EEG data comes from the Simultaneous Task EEG Workload (STEW) dataset. The code completes two-class classification with an accuracy rate of approximately 70%.
+After installing the prerequisites and obtaining the dataset, you can use the following command to run the main pipeline:
+```
+python mainPipeline.py
+```
+stew dataset link <a href="https://ieee-dataport.org/open-access/stew-simultaneous-task-eeg-workload-dataset">stew-simultaneous-task-eeg-workload-dataset</a>.
 
-For reporting any problems, please use the issues tab of this repo.
